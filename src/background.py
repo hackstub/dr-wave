@@ -17,6 +17,7 @@ class Background() :
 
     def render(self) :
 
+        shared.game.screen.fill((220,220,250))
         shared.game.screen.blit(self.pieces[self.currentPos], (0,0))
 
 

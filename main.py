@@ -9,6 +9,7 @@ from pygame.locals import *
 import src.shared as shared
 import src.game as game
 import src.background as background
+import src.character as character
 
 
 def main() :
@@ -18,6 +19,7 @@ def main() :
     shared.loadAssets()
     
     shared.background = background.Background()
+    shared.character  = character.Character()
 
     while True :
 

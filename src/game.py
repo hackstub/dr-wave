@@ -25,12 +25,12 @@ class Game() :
         self.eventHandler()
         
         # Update stuff
-        #shared.character.update()
+        shared.character.update()
         shared.background.update()
 
         # Render stuff
         shared.background.render()
-        #shared.character.render()
+        shared.character.render()
             
         # Update screen
         pygame.display.update()

@@ -17,12 +17,22 @@ screenSize = (1000,700)
 
 imagedb = { }
 
+runLeft  = None
+runRight = None
+
 def loadAssets() :
 
-    imagedb["bg0"] = pygame.image.load("assets/bg0.jpg")
-    imagedb["bg0"].set_colorkey((255,0,255))
+    imagedb["bg0"] = pygame.image.load("assets/bg0.png")
+    imagedb["bg0"].set_colorkey((255,0,254))
 
-    print(imagedb)
+    global runLeft
+    global runRight
+    runLeft = Sequence()
+    runRight = Sequence()
+   
+    runImage = pygame.image.load("assets/spriterun.png")
+    runLeft .load(runImage, (225,225), 4, (None, 0))
+    runRight.load(runImage, (225,225), 4, (None, 1))
 
     for image in imagedb.values() :
         image.convert_alpha()
@@ -45,7 +55,7 @@ class Cooldown:
 
     def restart(self) :
 
-        self.c = duration + random.randint(-self.randomness,self.randomness)
+        self.c = self.duration + random.randint(-self.randomness,self.randomness)
 
     def active(self) :
 
@@ -113,6 +123,7 @@ class Sequence:
         self.cooldown.tick()
     
         if (not self.cooldown.active()) :
+            self.goNextSprite()
             self.cooldown.restart()
 
 
