@@ -6,10 +6,22 @@ import pygame
 from pygame.locals import *
 
 # Game specific
-# import src.stuff
+import src.shared as shared
+import src.game as game
+import src.background as background
+
 
 def main() :
     
-    print("Lol")
+    shared.game = game.Game()
+
+    shared.loadAssets()
+    
+    shared.background = background.Background()
+
+    while True :
+
+        shared.game.mainLoop()
+
 
 main()
