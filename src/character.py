@@ -28,7 +28,7 @@ class Character() :
         self.transfo.setCooldown(1)
 
         self.dead = shared.assetsdb["charactermort"]
-        self.dead.setCooldown(3)
+        self.dead.setCooldown(4)
 
         self.pos = 0
 
@@ -56,8 +56,15 @@ class Character() :
             self.transfo.tick()
             idAfter = self.transfo.currentId
             if (idAfter < idBefore) :
-                self.doneTransforming()
-        
+                self.doneTransformingTo()
+
+        elif (self.status == CharacterState.TRANSFORMING_BACK) :
+            idBefore = self.transfo.currentId
+            self.transfo.tick()
+            idAfter = self.transfo.currentId
+            if (idAfter > idBefore) :
+                self.doneTransformingBack()
+
         elif (self.status == CharacterState.DEAD) :
             idBefore = self.dead.currentId
             self.dead.tick()
@@ -69,21 +76,26 @@ class Character() :
         if (self.waveStateCD.justStopped()) :
             self.status = CharacterState.SOLID
             #self.waveStateCD = shared.Cooldown(int(15/self.speedUpFactor), start=False)
-            self.transformDisabledCD.restart()
+            
+            self.status = CharacterState.TRANSFORMING_BACK
+            self.transfo.setCurrentSprite(len(self.transfo.sprites) - 1)
+            self.transfo.reverseLoop = True
 
         if (self.speedUp.justStopped()) :
             self.speedUp.restart()
             self.speedUpFactor += 0.01
 
-        print(self.pos)
         self.pos += self.speed()
         
         
     def speed(self) :
 
-        if ((self.status == CharacterState.SOLID)
-        or  (self.status == CharacterState.TRANSFORMING_TO)) :
+        if (self.status == CharacterState.SOLID) :
             return 10*self.speedUpFactor
+        if (self.status == CharacterState.TRANSFORMING_TO) :
+            return (10 + 40 * self.transfo.currentId/len(self.transfo.sprites))*self.speedUpFactor
+        if (self.status == CharacterState.TRANSFORMING_BACK) :
+            return (10 + 40 * self.transfo.currentId/len(self.transfo.sprites))*self.speedUpFactor
         if (self.status == CharacterState.WAVE) :
             return 50*self.speedUpFactor
         else :
@@ -115,26 +127,29 @@ class Character() :
             return
         elif (self.status == CharacterState.TRANSFORMING_TO) :
             sprite = self.transfo.getCurrentSprite()
+        elif (self.status == CharacterState.TRANSFORMING_BACK) :
+            sprite = self.transfo.getCurrentSprite()
         elif (self.status == CharacterState.DEAD) :
             sprite = self.dead.getCurrentSprite()
         else :
             sprite = self.run.getCurrentSprite()
         
-        print(self.status)
-        print(sprite)
-
         width, height = sprite.get_size()
 
-        shared.game.screen.blit(sprite, (shared.screenSize[0] / 2 - width /
-            2,400 - self.floor * 200))
+        shared.game.screen.blit(sprite, (shared.screenSize[0] / 2 - width/2,
+                                         shared.screenSize[1] - 30 - self.floor * 200 - height))
 
 
-    def doneTransforming(self) :
+    def doneTransformingTo(self) :
 
         self.status = CharacterState.WAVE
         self.waveStateCD.restart()
-         
 
+    def doneTransformingBack(self) :
+
+        self.status = CharacterState.SOLID
+        self.transformDisabledCD.restart()
+         
     def handleTransformKey(self) :
 
         if ((self.status == self.status.WAVE)
@@ -145,6 +160,7 @@ class Character() :
         shared.game.screen.fill((0,0,0))
         self.status = CharacterState.TRANSFORMING_TO
         self.transfo.setCurrentSprite(0)
+        self.transfo.reverseLoop = False
 
         if (pygame.key.get_pressed()[pygame.K_UP]) :
             self.floor += 1
