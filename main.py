@@ -14,11 +14,12 @@ import src.background as background
 import src.character as character
 import src.obstacles as obstacles
 
+pygame.init()
+pygame.mixer.init()
+
 currentScene = menu.Menu()
 
 def main() :
-    pygame.init()
-    
     shared.game = currentScene
 
     shared.loadAssets()

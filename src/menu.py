@@ -19,6 +19,9 @@ class Menu() :
         self.fpsClock = pygame.time.Clock()
         
         self.select, self.dy, self.menuanim = 1, 0, False
+        
+        #~ pygame.mixer.music.load("music/menu.ogg")
+        #~ pygame.mixer.music.play()
    
     def mainLoop(self) :
         
@@ -35,8 +38,10 @@ class Menu() :
         
         if self.menuanim:
             self.dy += 8
-		
-        if pygame.key.get_pressed()[pygame.K_RETURN] and self.select == 1: self.menuanim = True
+        
+        if pygame.key.get_pressed()[pygame.K_RETURN] and self.select == 1:
+            pygame.mixer.music.fadeout(1000)
+            self.menuanim = True
         
         # Update screen
         pygame.display.update()
