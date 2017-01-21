@@ -17,10 +17,8 @@ import src.obstacles as obstacles
 pygame.init()
 pygame.mixer.init()
 
-currentScene = menu.Menu()
-
 def main() :
-    shared.game = currentScene
+    shared.game = menu.Menu()
 
     shared.loadAssets()
     
