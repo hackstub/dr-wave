@@ -7,18 +7,23 @@ from pygame.locals import *
 
 # Game specific
 import src.shared as shared
+import src.menu as menu
 import src.game as game
+import src.menuGraphics as menuGraphics
 import src.background as background
 import src.character as character
 import src.obstacles as obstacles
 
+currentScene = menu.Menu()
 
 def main() :
+    pygame.init()
     
-    shared.game = game.Game()
+    shared.game = currentScene
 
     shared.loadAssets()
     
+    shared.menuGraphics = menuGraphics.MenuGraphics()
     shared.background = background.Background()
     shared.character  = character.Character()
     shared.obstacles  = obstacles.Obstacles()
@@ -26,6 +31,10 @@ def main() :
     while True :
 
         shared.game.mainLoop()
+        
+        nextScene = shared.game.getNextScene()
+        
+        if nextScene == "game": shared.game = game.Game()
 
 
 main()

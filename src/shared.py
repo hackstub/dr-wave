@@ -20,7 +20,10 @@ runLeft  = None
 runRight = None
 
 def loadAssets() :
-
+    assetsdb["title"] = pygame.image.load("assets/menu/title.png")
+    assetsdb["menu_play"] = pygame.image.load("assets/menu/play.png")
+    assetsdb["menu_quit"] = pygame.image.load("assets/menu/quit.png")
+    
     assetsdb["bg"] = []
     for i in range(8) :
         assetsdb["bg"].append(pygame.image.load("assets/background/"+str(i)+".png"))

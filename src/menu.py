@@ -1,10 +1,12 @@
 import sys
 import src.shared as shared
+import src.menuGraphics as menuGraphics
+import src.game as game
 
 import pygame
 from pygame.locals import *
 
-class Game() :
+class Menu() :
 
     def __init__(self) :
 
@@ -15,6 +17,8 @@ class Game() :
         # Set up FPS clock
         self.fps = 30
         self.fpsClock = pygame.time.Clock()
+        
+        self.select, self.dy, self.menuanim = 1, 0, False
    
     def mainLoop(self) :
         
@@ -22,15 +26,18 @@ class Game() :
         self.eventHandler()
         
         # Update stuff
-        shared.character.update()
         shared.background.update()
-        shared.obstacles.update()
 
         # Render stuff
-        shared.background.render()
-        shared.character.render()
-        shared.obstacles.render()
-            
+        shared.game.screen.fill((0,0,0))
+        shared.background.renderAt(1)
+        shared.menuGraphics.render(self.select, self.dy)
+        
+        if self.menuanim:
+            self.dy += 8
+		
+        if pygame.key.get_pressed()[pygame.K_RETURN] and self.select == 1: self.menuanim = True
+        
         # Update screen
         pygame.display.update()
         self.fpsClock.tick(self.fps)
@@ -48,13 +55,16 @@ class Game() :
                 if (event.key == pygame.K_ESCAPE):
                     pygame.quit()
 
-                # If F is pressed, do some stuff
-                if (event.key == pygame.K_f) :
-                    shared.character.handleTransformKey()
-    
+                if (event.key == pygame.K_UP) :
+                    self.select = 1
+                
+                if (event.key == pygame.K_DOWN) :
+                    self.select = 2
+                
+                if (event.key == pygame.K_RETURN) and self.select == 2:
+                    pygame.quit()
+
     def getNextScene(self):
-        return None
-
-
-
+        if self.dy > 200:
+            return "game"
 
