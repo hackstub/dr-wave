@@ -27,10 +27,12 @@ class Game() :
         # Update stuff
         shared.character.update()
         shared.background.update()
+        shared.obstacles.update()
 
         # Render stuff
         shared.background.render()
         shared.character.render()
+        shared.obstacles.render()
             
         # Update screen
         pygame.display.update()

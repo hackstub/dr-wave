@@ -27,6 +27,9 @@ def loadAssets() :
     for i in range(5) :
         imagedb["bg"].append(pygame.image.load("assets/backgrounds/"+str(i)+".jpg"))
         imagedb["bg"][i].convert_alpha()
+    
+    imagedb["block"] = pygame.image.load("assets/block.png")
+    imagedb["block"].convert_alpha()
 
     #imagedb["bg"].set_colorkey((255,0,254))
 

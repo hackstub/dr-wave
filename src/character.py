@@ -8,9 +8,13 @@ class Character() :
         self.runRight = shared.runRight
         self.runRight.setCooldown(5)
 
+        self.pos = 0
+
     def update(self) :
 
         self.runRight.tick()
+        
+        self.pos += shared.characterSpeed
 
     def render(self) :
 

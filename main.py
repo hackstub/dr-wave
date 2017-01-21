@@ -10,6 +10,7 @@ import src.shared as shared
 import src.game as game
 import src.background as background
 import src.character as character
+import src.obstacles as obstacles
 
 
 def main() :
@@ -20,6 +21,7 @@ def main() :
     
     shared.background = background.Background()
     shared.character  = character.Character()
+    shared.obstacles  = obstacles.Obstacles()
 
     while True :
 

@@ -7,24 +7,20 @@ class Background() :
 
         self.pieces = shared.imagedb["bg"]
 
-        # Dunno what to do with this but we'll see lol
-        self.currentPos = 0
-
     def update(self) :
 
-        self.currentPos -= shared.characterSpeed
+        pass
 
     def render(self) :
 
-        merp = shared.screenSize[0]/1.3
+        bgWidth = shared.screenSize[0]/1.3
 
-        n = -1 * int(self.currentPos / merp)
-        print(n)
+        n = int(shared.character.pos / bgWidth)
 
         shared.game.screen.fill((0,220,0))
         for i in range(n,n+3):
             iBg = i % len(self.pieces)
-            shared.game.screen.blit(self.pieces[iBg], (self.currentPos+i*merp,0))
+            shared.game.screen.blit(self.pieces[iBg], (i*bgWidth-shared.character.pos,0))
 
 
 
