@@ -14,31 +14,35 @@ screenSize = (1280,720)
 #   Global assets                                                             #
 ###############################################################################
 
-imagedb = { }
+assetsdb = { }
 
 runLeft  = None
 runRight = None
 
 def loadAssets() :
 
-    imagedb["bg"] = []
-    for i in range(5) :
-        imagedb["bg"].append(pygame.image.load("assets/backgrounds/"+str(i)+".jpg"))
-        imagedb["bg"][i].convert_alpha()
+    assetsdb["bg"] = []
+    for i in range(8) :
+        assetsdb["bg"].append(pygame.image.load("assets/background/"+str(i)+".png"))
+        assetsdb["bg"][i].convert_alpha()
     
-    imagedb["block"] = pygame.image.load("assets/block.png")
-    imagedb["block"].convert_alpha()
+    assetsdb["bottomline"] = pygame.image.load("assets/ligne.png")
+    
+    assetsdb["block"] = pygame.image.load("assets/block.png")
+    assetsdb["block"].convert_alpha()
 
-    #imagedb["bg"].set_colorkey((255,0,254))
-
-    global runLeft
-    global runRight
-    runLeft = Sequence()
-    runRight = Sequence()
+    assetsdb["characterrun"] = Sequence(reverseLoop=True)
+    characterrun = pygame.image.load("assets/perso/animPerso.png")
+    assetsdb["characterrun"].load(characterrun, (283,283), 5, (None, 0))
+    
+    #global runLeft
+    #global runRight
+    #runLeft = Sequence()
+    #runRight = Sequence()
    
-    runImage = pygame.image.load("assets/spriterun.png")
-    runLeft .load(runImage, (225,225), 4, (None, 1))
-    runRight.load(runImage, (225,225), 4, (None, 0))
+    #runImage = pygame.image.load("assets/spriterun.png")
+    #runLeft .load(runImage, (225,225), 4, (None, 1))
+    #runRight.load(runImage, (225,225), 4, (None, 0))
 
 
 ###############################################################################
@@ -81,13 +85,16 @@ class Cooldown:
 
 class Sequence:
 
-    def __init__(self) :
+    def __init__(self, reverseLoop=False) :
 
         self.sprites = [ ]
 
         self.currentId = -1
 
         self.cd = None
+
+        self.reverseLoop = reverseLoop
+        self.order = 1
 
     def load(self, img, spriteSize, n, offset) :
         
@@ -119,10 +126,25 @@ class Sequence:
     
     def goNextSprite(self) :
 
-        self.currentId += 1
+        if (self.order == 1) :
+            self.currentId += 1
+        else :
+            self.currentId -= 1
 
         if (self.currentId >= len(self.sprites)) :
-            self.currentId = 0
+
+            if (self.reverseLoop) :
+                self.order = -1
+                self.currentId += -2
+            else :
+                self.currentId = 0
+
+        elif (self.currentId < 0) :
+            
+            if (self.reverseLoop) :
+                self.currentId += 2
+                self.order = 1
+
 
     def setCooldown(self, duration, randomness=0) :
 
@@ -135,5 +157,6 @@ class Sequence:
         if (not self.cooldown.active()) :
             self.goNextSprite()
             self.cooldown.restart()
+
 
 

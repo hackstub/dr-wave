@@ -5,9 +5,10 @@ class Obstacles() :
 
     def __init__(self) :
 
-        self.obstaclePos = [ 500 ]
+        #self.obstaclePos = [ 500 ]
+        self.obstaclePos = [ ]
 
-        self.sprite = shared.imagedb["block"]
+        self.sprite = shared.assetsdb["block"]
         self.width, self.height = self.sprite.get_size()
 
     def update(self) :
