@@ -5,11 +5,16 @@ from pygame.locals import *
 import math
 from enum import Enum
 
+import sys
+
 import src.shared as shared
 
 class CharacterState(Enum) :
     SOLID = 0
     WAVE = 1
+    TRANSFORMING_TO   = 2
+    TRANSFORMING_BACK = 3
+    DEAD = 4
 
 
 class Character() :
@@ -18,12 +23,18 @@ class Character() :
 
         self.run = shared.assetsdb["characterrun"]
         self.run.setCooldown(1)
+   
+        self.transfo = shared.assetsdb["charactertransfo"]
+        self.transfo.setCooldown(1)
+
+        self.dead = shared.assetsdb["charactermort"]
+        self.dead.setCooldown(3)
 
         self.pos = 0
 
         self.status = CharacterState.SOLID
     
-        self.transformCD = shared.Cooldown(10, start=False)
+        self.waveStateCD = shared.Cooldown(10, start=False)
         self.transformDisabledCD = shared.Cooldown(10, start=False)
         
         self.speedUp = shared.Cooldown(30)
@@ -31,42 +42,52 @@ class Character() :
 
         self.floor = 0
         
-        self.viseAngleCD = shared.Cooldown(5)
-        self.viseAngle = 0
-
     def update(self) :
 
-        self.run.tick()
-        self.transformCD.tick()
+        self.waveStateCD.tick()
         self.transformDisabledCD.tick()
         self.speedUp.tick()
+        
+        if (self.status == CharacterState.SOLID) :
+            self.run.tick()
 
-        if (self.transformCD.justStopped()) :
+        elif (self.status == CharacterState.TRANSFORMING_TO) :
+            idBefore = self.transfo.currentId
+            self.transfo.tick()
+            idAfter = self.transfo.currentId
+            if (idAfter < idBefore) :
+                self.doneTransforming()
+        
+        elif (self.status == CharacterState.DEAD) :
+            idBefore = self.dead.currentId
+            self.dead.tick()
+            idAfter = self.dead.currentId
+            if (idAfter < idBefore) :
+                print("Game over lol")
+                sys.exit(-1)
+
+        if (self.waveStateCD.justStopped()) :
             self.status = CharacterState.SOLID
-            #self.transformCD = shared.Cooldown(int(15/self.speedUpFactor), start=False)
+            #self.waveStateCD = shared.Cooldown(int(15/self.speedUpFactor), start=False)
             self.transformDisabledCD.restart()
 
         if (self.speedUp.justStopped()) :
             self.speedUp.restart()
             self.speedUpFactor += 0.01
 
+        print(self.pos)
         self.pos += self.speed()
         
         
-        
-        
-        self.viseAngleCD.tick()
-        if (self.viseAngleCD.justStopped()) :
-            self.viseAngleCD.restart()
-            self.viseAngle += 10
-
-
     def speed(self) :
 
-        if (self.status == CharacterState.SOLID) :
+        if ((self.status == CharacterState.SOLID)
+        or  (self.status == CharacterState.TRANSFORMING_TO)) :
             return 10*self.speedUpFactor
         if (self.status == CharacterState.WAVE) :
             return 50*self.speedUpFactor
+        else :
+            return 0
 
     def width(self) :
         
@@ -76,36 +97,54 @@ class Character() :
 
     def collides(self) :
 
-        return (self.status == CharacterState.SOLID)
+        return (self.status != CharacterState.WAVE)
+
+    def die(self) :
+        
+        if (self.status == CharacterState.DEAD) :
+            return
+
+        self.status = CharacterState.DEAD
+        
+        self.dead.setCurrentSprite(0)
+
 
     def render(self) :
 
         if (self.status == CharacterState.WAVE) :
             return
+        elif (self.status == CharacterState.TRANSFORMING_TO) :
+            sprite = self.transfo.getCurrentSprite()
+        elif (self.status == CharacterState.DEAD) :
+            sprite = self.dead.getCurrentSprite()
+        else :
+            sprite = self.run.getCurrentSprite()
+        
+        print(self.status)
+        print(sprite)
 
-        sprite = self.run.getCurrentSprite()
         width, height = sprite.get_size()
 
         shared.game.screen.blit(sprite, (shared.screenSize[0] / 2 - width /
             2,400 - self.floor * 200))
 
 
-        #viseX = (width/2 + 30) * math.cos(self.viseAngle * 3.141592653 / 180)
-        #viseY = (width/2 + 30) * math.sin(self.viseAngle * 3.141592653 / 180)
-        #pygame.draw.circle(shared.game.screen, (200,200,200),
-        #        (int(shared.screenSize[0] / 2 - width/2 + viseX), int(500 - viseY)), 4)
+    def doneTransforming(self) :
+
+        self.status = CharacterState.WAVE
+        self.waveStateCD.restart()
+         
 
     def handleTransformKey(self) :
 
-        if (self.status == self.status.WAVE) :
-            return
-        
-        if (self.transformDisabledCD.active()) :
+        if ((self.status == self.status.WAVE)
+        or (self.status == self.status.TRANSFORMING_TO)
+        or (self.transformDisabledCD.active())) :
             return
 
         shared.game.screen.fill((0,0,0))
-        self.status = CharacterState.WAVE        
-        self.transformCD.restart()
+        self.status = CharacterState.TRANSFORMING_TO
+        self.transfo.setCurrentSprite(0)
 
         if (pygame.key.get_pressed()[pygame.K_UP]) :
             self.floor += 1

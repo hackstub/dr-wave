@@ -5,8 +5,8 @@ class Obstacles() :
 
     def __init__(self) :
 
-        #self.obstaclePos = [ 500 ]
-        self.obstaclePos = [ ]
+        self.obstaclePos = [ 500 ]
+        #self.obstaclePos = [ ]
 
         self.sprite = shared.assetsdb["block"]
         self.width, self.height = self.sprite.get_size()
@@ -19,8 +19,7 @@ class Obstacles() :
         for x in self.obstaclePos :
             if (abs(shared.character.pos - x) < (shared.character.width()/2 +
                 self.width/2) * 0.65) :
-                print("Game over wesh")
-                sys.exit(-1)
+                shared.character.die()
 
     def render(self) :
 

@@ -20,7 +20,7 @@ runLeft  = None
 runRight = None
 
 def loadAssets() :
-    assetsdb["title"] = pygame.image.load("assets/menu/title.png")
+    assetsdb["title"]     = pygame.image.load("assets/menu/title.png")
     assetsdb["menu_play"] = pygame.image.load("assets/menu/play.png")
     assetsdb["menu_quit"] = pygame.image.load("assets/menu/quit.png")
     
@@ -35,9 +35,17 @@ def loadAssets() :
     assetsdb["block"].convert_alpha()
 
     assetsdb["characterrun"] = Sequence(reverseLoop=True)
-    characterrun = pygame.image.load("assets/perso/animPerso.png")
+    characterrun = pygame.image.load("assets/perso/run.png")
     assetsdb["characterrun"].load(characterrun, (283,283), 5, (None, 0))
-    
+
+    assetsdb["charactertransfo"] = Sequence()
+    charactertransfo = pygame.image.load("assets/perso/transfo.png")
+    assetsdb["charactertransfo"].load(charactertransfo, (283,283), 7, (None, 0))
+ 
+    assetsdb["charactermort"] = Sequence()
+    charactermort = pygame.image.load("assets/perso/mort.png")
+    assetsdb["charactermort"].load(charactermort, (283,350), 4, (None, 0))
+       
     #global runLeft
     #global runRight
     #runLeft = Sequence()
@@ -147,7 +155,7 @@ class Sequence:
             if (self.reverseLoop) :
                 self.currentId += 2
                 self.order = 1
-
+        
 
     def setCooldown(self, duration, randomness=0) :
 
