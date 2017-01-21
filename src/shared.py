@@ -10,8 +10,6 @@ debug = True
 
 screenSize = (1280,720)
 
-characterSpeed = 3
-
 ###############################################################################
 #   Global assets                                                             #
 ###############################################################################
@@ -51,12 +49,15 @@ import random
 
 class Cooldown:
 
-    def __init__(self, duration, randomness=0) :
+    def __init__(self, duration, randomness=0, start=True) :
 
         self.duration = duration
         self.randomness = randomness
 
-        self.restart()
+        self.c = 0
+
+        if (start) :
+            self.restart()
 
     def restart(self) :
 
@@ -65,6 +66,10 @@ class Cooldown:
     def active(self) :
 
         return (self.c > 0)
+
+    def justStopped(self) :
+
+        return (self.c == 0)
 
     def tick(self) :
 

@@ -50,7 +50,7 @@ class Game() :
 
                 # If F is pressed, do some stuff
                 if (event.key == pygame.K_f) :
-                    pass
+                    shared.character.handleTransformKey()
 
 
 

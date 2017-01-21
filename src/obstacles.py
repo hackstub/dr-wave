@@ -5,12 +5,15 @@ class Obstacles() :
 
     def __init__(self) :
 
-        self.obstaclePos = [ 200 ]
+        self.obstaclePos = [ 500 ]
 
         self.sprite = shared.imagedb["block"]
         self.width, self.height = self.sprite.get_size()
 
     def update(self) :
+
+        if (not shared.character.collides()) :
+            return
 
         for x in self.obstaclePos :
             if (abs(shared.character.pos - x) < (shared.character.width()/2 +
