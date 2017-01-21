@@ -34,7 +34,6 @@ def loadAssets() :
     assetsdb["7"] = pygame.image.load("assets/timer/7.png")
     assetsdb["8"] = pygame.image.load("assets/timer/8.png")
     assetsdb["9"] = pygame.image.load("assets/timer/9.png")
-    assetsdb[":"] = pygame.image.load("assets/timer/s.png")
     
     assetsdb["bg"] = []
     for i in range(8) :
