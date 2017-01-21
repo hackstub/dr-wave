@@ -23,11 +23,13 @@ class Character() :
 
         self.status = CharacterState.SOLID
     
-        self.transformCD = shared.Cooldown(15, start=False)
+        self.transformCD = shared.Cooldown(10, start=False)
         self.transformDisabledCD = shared.Cooldown(10, start=False)
         
         self.speedUp = shared.Cooldown(30)
         self.speedUpFactor = 1.0
+
+        self.floor = 0
         
         self.viseAngleCD = shared.Cooldown(5)
         self.viseAngle = 0
@@ -64,7 +66,7 @@ class Character() :
         if (self.status == CharacterState.SOLID) :
             return 10*self.speedUpFactor
         if (self.status == CharacterState.WAVE) :
-            return 30*self.speedUpFactor
+            return 50*self.speedUpFactor
 
     def width(self) :
         
@@ -85,7 +87,7 @@ class Character() :
         width, height = sprite.get_size()
 
         shared.game.screen.blit(sprite, (shared.screenSize[0] / 2 - width /
-            2,400))
+            2,400 - self.floor * 200))
 
 
         #viseX = (width/2 + 30) * math.cos(self.viseAngle * 3.141592653 / 180)
@@ -104,6 +106,14 @@ class Character() :
         shared.game.screen.fill((0,0,0))
         self.status = CharacterState.WAVE        
         self.transformCD.restart()
+
+        if (pygame.key.get_pressed()[pygame.K_UP]) :
+            self.floor += 1
+        if (pygame.key.get_pressed()[pygame.K_DOWN]) :
+            self.floor -= 1
+
+        if (self.floor <  0) : self.floor = 0
+        if (self.floor >= 1) : self.floor = 1
 
 
 

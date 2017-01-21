@@ -33,7 +33,8 @@ def main() :
         
         nextScene = shared.game.getNextScene()
         
-        if nextScene == "game": shared.game = game.Game()
+        if nextScene == "game": 
+            shared.game = game.Game()
 
 
 main()

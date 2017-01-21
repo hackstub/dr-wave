@@ -20,7 +20,7 @@ class Game() :
         #~ pygame.mixer.music.play()
 
     def mainLoop(self) :
-        
+
         # Handle events
         self.eventHandler()
         
@@ -55,7 +55,8 @@ class Game() :
                 if (event.key == pygame.K_f) :
                     shared.character.handleTransformKey()
     
-    def getNextScene(self):
+    def getNextScene(self) :
+
         return None
 
 
