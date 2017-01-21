@@ -26,16 +26,22 @@ class Background() :
     def render(self) :
 
         charpos = shared.character.pos
-        shared.game.screen.fill((0,0,0))
+        shared.game.screen.fill((0,150,0))
 
         if (shared.character.collides()) :
             self.renderAt(charpos)
             self.weirdEffectParam = 0
         else :
+           
+            wea = self.weirdEffectParam
+            if (wea > 10) : 
+                wea = 20 - wea
+        
+            shared.game.screen.fill((wea*13,150-wea*wea,wea*13))
             
-            for i in range(0, self.weirdEffectParam) :
-                i = self.weirdEffectParam - i
-                self.renderAt(charpos - i*(i*0.2 + 0.1 * self.weirdEffectParam*self.weirdEffectParam))
+            for i in range(0, wea) :
+                i = wea - i
+                self.renderAt(charpos - i*i*4)
             self.weirdEffectParam += 1
         
         shared.game.screen.blit(self.line, (0,0))
