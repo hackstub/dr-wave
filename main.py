@@ -15,7 +15,7 @@ import src.character as character
 import src.obstacles as obstacles
 
 pygame.init()
-pygame.mixer.init()
+pygame.mixer.init(48000)
 
 def main() :
     shared.game = menu.Menu()
