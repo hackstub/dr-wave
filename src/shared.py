@@ -1,15 +1,16 @@
 import pygame
 from pygame.locals import *
 
-
-#debug = False
-debug = True
-
 ###############################################################################
 #   Global parameters / configuration                                         #
 ###############################################################################
 
-screenSize = (1000,700)
+#debug = False
+debug = True
+
+screenSize = (1280,720)
+
+characterSpeed = 3
 
 ###############################################################################
 #   Global assets                                                             #
@@ -22,8 +23,12 @@ runRight = None
 
 def loadAssets() :
 
-    imagedb["bg0"] = pygame.image.load("assets/bg0.png")
-    imagedb["bg0"].set_colorkey((255,0,254))
+    imagedb["bg"] = []
+    for i in range(5) :
+        imagedb["bg"].append(pygame.image.load("assets/backgrounds/"+str(i)+".jpg"))
+        imagedb["bg"][i].convert_alpha()
+
+    #imagedb["bg"].set_colorkey((255,0,254))
 
     global runLeft
     global runRight
@@ -31,11 +36,8 @@ def loadAssets() :
     runRight = Sequence()
    
     runImage = pygame.image.load("assets/spriterun.png")
-    runLeft .load(runImage, (225,225), 4, (None, 0))
-    runRight.load(runImage, (225,225), 4, (None, 1))
-
-    for image in imagedb.values() :
-        image.convert_alpha()
+    runLeft .load(runImage, (225,225), 4, (None, 1))
+    runRight.load(runImage, (225,225), 4, (None, 0))
 
 
 ###############################################################################

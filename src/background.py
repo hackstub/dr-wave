@@ -5,20 +5,26 @@ class Background() :
 
     def __init__(self) :
 
-        self.pieces = [ shared.imagedb["bg0"] ]
+        self.pieces = shared.imagedb["bg"]
 
         # Dunno what to do with this but we'll see lol
         self.currentPos = 0
 
     def update(self) :
 
-        pass
-
+        self.currentPos -= shared.characterSpeed
 
     def render(self) :
 
-        shared.game.screen.fill((220,220,250))
-        shared.game.screen.blit(self.pieces[self.currentPos], (0,0))
+        merp = shared.screenSize[0]/1.3
+
+        n = -1 * int(self.currentPos / merp)
+        print(n)
+
+        shared.game.screen.fill((0,220,0))
+        for i in range(n,n+3):
+            iBg = i % len(self.pieces)
+            shared.game.screen.blit(self.pieces[iBg], (self.currentPos+i*merp,0))
 
 
 
