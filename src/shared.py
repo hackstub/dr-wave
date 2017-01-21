@@ -24,6 +24,17 @@ def loadAssets() :
     assetsdb["menu_play"] = pygame.image.load("assets/menu/play.png")
     assetsdb["menu_quit"] = pygame.image.load("assets/menu/quit.png")
     
+    assetsdb["0"] = pygame.image.load("assets/timer/0.png")
+    assetsdb["1"] = pygame.image.load("assets/timer/1.png")
+    assetsdb["2"] = pygame.image.load("assets/timer/2.png")
+    assetsdb["3"] = pygame.image.load("assets/timer/3.png")
+    assetsdb["4"] = pygame.image.load("assets/timer/4.png")
+    assetsdb["5"] = pygame.image.load("assets/timer/5.png")
+    assetsdb["6"] = pygame.image.load("assets/timer/6.png")
+    assetsdb["7"] = pygame.image.load("assets/timer/7.png")
+    assetsdb["8"] = pygame.image.load("assets/timer/8.png")
+    assetsdb["9"] = pygame.image.load("assets/timer/9.png")
+    
     assetsdb["bg"] = []
     for i in range(8) :
         assetsdb["bg"].append(pygame.image.load("assets/background/"+str(i)+".png"))
