@@ -70,6 +70,6 @@ class Menu() :
                     pygame.quit()
 
     def getNextScene(self):
-        if self.dy > 200:
+        if self.dy > 230:
             return "game"
 
