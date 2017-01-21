@@ -16,9 +16,18 @@ class Character() :
         
         self.pos += shared.characterSpeed
 
+    def width(self) :
+        
+        sprite = self.runRight.getCurrentSprite()
+        width, height = sprite.get_size()
+        return width
+
     def render(self) :
 
-        shared.game.screen.blit(self.runRight.getCurrentSprite(), (450,500))
+        sprite = self.runRight.getCurrentSprite()
+        width, height = sprite.get_size()
+
+        shared.game.screen.blit(sprite, (shared.screenSize[0] / 2 - width / 2,500))
 
 
 
