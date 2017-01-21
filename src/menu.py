@@ -22,7 +22,7 @@ class Menu() :
 
         self.click = pygame.mixer.Sound("sounds/click.ogg")
         pygame.mixer.music.load("music/menu.ogg")
-        pygame.mixer.music.play()
+        pygame.mixer.music.play(-1)
    
     def mainLoop(self) :
         

@@ -20,9 +20,20 @@ runLeft  = None
 runRight = None
 
 def loadAssets() :
-    assetsdb["title"] = pygame.image.load("assets/menu/title.png")
+    assetsdb["title"]     = pygame.image.load("assets/menu/title.png")
     assetsdb["menu_play"] = pygame.image.load("assets/menu/play.png")
     assetsdb["menu_quit"] = pygame.image.load("assets/menu/quit.png")
+    
+    assetsdb["0"] = pygame.image.load("assets/timer/0.png")
+    assetsdb["1"] = pygame.image.load("assets/timer/1.png")
+    assetsdb["2"] = pygame.image.load("assets/timer/2.png")
+    assetsdb["3"] = pygame.image.load("assets/timer/3.png")
+    assetsdb["4"] = pygame.image.load("assets/timer/4.png")
+    assetsdb["5"] = pygame.image.load("assets/timer/5.png")
+    assetsdb["6"] = pygame.image.load("assets/timer/6.png")
+    assetsdb["7"] = pygame.image.load("assets/timer/7.png")
+    assetsdb["8"] = pygame.image.load("assets/timer/8.png")
+    assetsdb["9"] = pygame.image.load("assets/timer/9.png")
     
     assetsdb["bg"] = []
     for i in range(8) :
@@ -35,9 +46,17 @@ def loadAssets() :
     assetsdb["block"].convert_alpha()
 
     assetsdb["characterrun"] = Sequence(reverseLoop=True)
-    characterrun = pygame.image.load("assets/perso/animPerso.png")
+    characterrun = pygame.image.load("assets/perso/run.png")
     assetsdb["characterrun"].load(characterrun, (283,283), 5, (None, 0))
-    
+
+    assetsdb["charactertransfo"] = Sequence()
+    charactertransfo = pygame.image.load("assets/perso/transfo.png")
+    assetsdb["charactertransfo"].load(charactertransfo, (283,283), 7, (None, 0))
+ 
+    assetsdb["charactermort"] = Sequence()
+    charactermort = pygame.image.load("assets/perso/mort.png")
+    assetsdb["charactermort"].load(charactermort, (283,350), 4, (None, 0))
+       
     #global runLeft
     #global runRight
     #runLeft = Sequence()
@@ -147,7 +166,7 @@ class Sequence:
             if (self.reverseLoop) :
                 self.currentId += 2
                 self.order = 1
-
+        
 
     def setCooldown(self, duration, randomness=0) :
 
