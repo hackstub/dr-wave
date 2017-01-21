@@ -11,8 +11,8 @@ class Menu() :
     def __init__(self) :
 
         # Set dimensions
-        self.screen = pygame.display.set_mode(shared.screenSize, 0, 32)
-        pygame.display.set_caption("Docteur Wavenstein")
+        self.screen = pygame.display.set_mode(shared.screenSize, pygame.HWSURFACE | pygame.DOUBLEBUF)
+        pygame.display.set_caption("Doctor Wave")
 
         # Set up FPS clock
         self.fps = 30
