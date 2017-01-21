@@ -1,5 +1,6 @@
 import sys
 import src.shared as shared
+import src.timer as timer
 
 import pygame
 from pygame.locals import *
@@ -15,6 +16,8 @@ class Game() :
         # Set up FPS clock
         self.fps = 30
         self.fpsClock = pygame.time.Clock()
+        
+        self.clock = timer.Timer()
 
         pygame.mixer.music.load("music/main.ogg")
         pygame.mixer.music.play(-1)
@@ -28,11 +31,13 @@ class Game() :
         shared.character.update()
         shared.background.update()
         shared.obstacles.update()
+        self.clock.update()
 
         # Render stuff
         shared.background.render()
         shared.character.render()
         shared.obstacles.render()
+        self.clock.render()
             
         # Update screen
         pygame.display.update()
