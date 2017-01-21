@@ -21,7 +21,7 @@ class Menu() :
         self.select, self.dy, self.menuanim = 1, 0, False
         
         pygame.mixer.music.load("music/menu.ogg")
-        pygame.mixer.music.play()
+        pygame.mixer.music.play(-1)
    
     def mainLoop(self) :
         

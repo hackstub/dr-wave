@@ -17,7 +17,7 @@ class Game() :
         self.fpsClock = pygame.time.Clock()
 
         pygame.mixer.music.load("music/main.ogg")
-        pygame.mixer.music.play()
+        pygame.mixer.music.play(-1)
 
     def mainLoop(self) :
 

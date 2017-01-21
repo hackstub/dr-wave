@@ -16,6 +16,7 @@ import src.obstacles as obstacles
 
 pygame.init()
 pygame.mixer.init(48000)
+pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP])
 
 def main() :
     shared.game = menu.Menu()
