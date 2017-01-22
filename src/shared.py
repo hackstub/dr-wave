@@ -19,6 +19,21 @@ assetsdb = { }
 runLeft  = None
 runRight = None
 
+def mergeBg(bgs) :
+
+    w = 0
+    for bg in bgs :
+        w += bg.get_size()[0]
+    h = bgs[0].get_size()[1]
+
+    out = pygame.Surface((w, h), SRCALPHA)
+    x = 0
+    for bg in bgs :
+        out.blit(bg, (x, 0))
+        x   += bg.get_size()[0]
+
+    return out
+
 def loadAssets() :
     assetsdb["title"]     = pygame.image.load("assets/interface/title.png")
     assetsdb["menu_play"] = pygame.image.load("assets/interface/play.png")
@@ -40,8 +55,12 @@ def loadAssets() :
     for i in range(5) :
         assetsdb["bg2"].append(pygame.image.load("assets/bg2/"+str(i)+".png"))
         assetsdb["bg2"][i].convert_alpha()
-    
+  
+    assetsdb["bg0"] = mergeBg(assetsdb["bg0"]) 
+    assetsdb["bg1"] = mergeBg(assetsdb["bg1"]) 
+    assetsdb["bg2"] = mergeBg(assetsdb["bg2"]) 
     assetsdb["bg3"] = pygame.image.load("assets/bg3.png")
+
     assetsdb["seauley"] = pygame.image.load("assets/seauley.png")
     assetsdb["bottomline"] = pygame.image.load("assets/ligne.png")
     
