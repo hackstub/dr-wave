@@ -38,6 +38,8 @@ def loadAssets() :
     assetsdb["title"]     = pygame.image.load("assets/interface/title.png")
     assetsdb["menu_play"] = pygame.image.load("assets/interface/play.png")
     assetsdb["menu_quit"] = pygame.image.load("assets/interface/quit.png")
+    assetsdb["menu_retry"] = pygame.image.load("assets/interface/retry.png")
+    assetsdb["over"] = pygame.image.load("assets/interface/gameOver.png")
     
     assetsdb["timer_box"] = pygame.image.load("assets/interface/timerbox.png")
 

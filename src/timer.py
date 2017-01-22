@@ -13,9 +13,10 @@ class Timer() :
     def update(self) :
     
         self.t = pygame.time.get_ticks()
+        self.dt = self.t-self.t0
 
     def render(self) :
-        t, dx = math.floor((self.t-self.t0)/100), 0
+        t, dx = math.floor((self.dt)/100), 0
         shared.game.screen.blit(self.box,     (shared.screenSize[0]-188, 12))
         for c in str(t):
             shared.game.screen.blit(self.digits.sprites[int(c)],
