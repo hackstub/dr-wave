@@ -70,6 +70,7 @@ class Menu() :
                 
                 if (event.key == pygame.K_RETURN) and self.select == 2:
                     pygame.quit()
+                    sys.exit(0)
 
     def getNextScene(self):
         if self.dy > 230:
