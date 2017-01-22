@@ -8,8 +8,8 @@
 
 	Dr. Wave was your average scientist working in an average laboratory. One
 day, Dr. Wave built a device that allowed him to be both a wave and a particle
-at the same sime, thus breaking the laws of physics. However, because breaking
-the laws of physics is very illegal, a horde of angry scientists is out to get
+at the same time, thus breaking the laws of physics. But, because breaking the
+laws of physics is very illegal, a horde of angry scientists is now out to get
 him!
 
 [ ] > Controls
