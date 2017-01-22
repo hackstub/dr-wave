@@ -6,7 +6,8 @@ class Background() :
 
         self.pieces = shared.assetsdb["bg"]
         
-        self.line = shared.assetsdb["bottomline"]
+        self.line    = shared.assetsdb["bottomline"]
+        self.seauley = shared.assetsdb["seauley"]
        
         self.piecesEdges = []
         x = 0
@@ -25,9 +26,12 @@ class Background() :
     def render(self) :
 
         charpos = shared.character.pos
-        shared.game.screen.fill((0,150,0))
 
         if (shared.character.collides()) :
+        
+            shared.game.screen.fill((0,150,0))
+            shared.game.screen.blit(self.seauley, (1000,40))
+            
             self.renderAt(charpos)
             self.weirdEffectParam = 0
         else :
@@ -37,6 +41,7 @@ class Background() :
                 wea = 20 - wea
         
             shared.game.screen.fill((wea*13,150-wea*wea,wea*13))
+            shared.game.screen.blit(self.seauley, (1000,40))
             
             for i in range(0, wea) :
                 i = wea - i
