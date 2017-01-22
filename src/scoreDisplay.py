@@ -19,7 +19,7 @@ class ScoreDisplay() :
                 shared.game.screen.blit(shared.assetsdb["timer_digits"].sprites[int(c)], (220+dx, 450))
                 dx += 48
             dx = 0
-            shared.game.screen.blit(shared.assetsdb["star"], (220, 500))
+            shared.game.screen.blit(shared.assetsdb["star"], (220-60, 500))
             for c in str(s):
                 shared.game.screen.blit(shared.assetsdb["timer_digits"].sprites[int(c)], (220+dx, 500))
                 dx += 48
