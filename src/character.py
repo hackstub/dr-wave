@@ -67,7 +67,7 @@ class Character() :
             self.run.tick()
 
             if (self.floor != 0) and (not shared.obstacles.plateformeAtX(self.pos)) :
-                self.floor -= 0.05
+                self.floor -= 0.2
 
             if (self.floor <= 0) :
                 self.floor = 0
