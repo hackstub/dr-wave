@@ -41,6 +41,7 @@ def loadAssets() :
         assetsdb["bg2"].append(pygame.image.load("assets/bg2/"+str(i)+".png"))
         assetsdb["bg2"][i].convert_alpha()
     
+    assetsdb["bg3"] = pygame.image.load("assets/bg3.png")
     assetsdb["seauley"] = pygame.image.load("assets/seauley.png")
     assetsdb["bottomline"] = pygame.image.load("assets/ligne.png")
     
