@@ -178,19 +178,25 @@ class Character() :
         self.waveStateCD = shared.Cooldown(5 + int(self.morphChargeCount/4), start=False)
         self.status = CharacterState.WAVE
         self.waveStateCD.restart()
-
+        
     def doneMorphingBack(self) :
 
         self.status = CharacterState.SOLID
         self.morphDisabledCD.restart()
-         
+        
     def morphStart(self) :
+
 
         if ((self.status == CharacterState.WAVE)
         or (self.status == CharacterState.MORPH_TO)
+        or (self.status == CharacterState.MORPH_BACK)
+        or (self.status == CharacterState.DEAD)
         or (self.morphDisabledCD.active())) :
             return
-
+        
+        if (self.floor != 0) and (self.floor != 1) :
+            return
+        
         shared.game.screen.fill((0,0,0))
         self.status = CharacterState.MORPH_TO
         self.morph.setCurrentSprite(0)
@@ -210,7 +216,15 @@ class Character() :
 
         if ((self.status == CharacterState.WAVE)
         or (self.status == CharacterState.MORPH_TO)
+        or (self.status == CharacterState.MORPH_BACK)
+        or (self.status == CharacterState.DEAD)
         or (self.morphDisabledCD.active())) :
+            return
+        
+        if (self.morphChargeCount != 0) :
+            return
+
+        if (self.floor != 0) and (self.floor != 1) :
             return
         
         self.dashLoadingSound.play()
