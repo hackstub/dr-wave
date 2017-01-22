@@ -20,7 +20,15 @@ class Game() :
         self.clock = timer.Timer()
 
         self.music = pygame.mixer.Sound("music/main.ogg")
-        self.music.play()
+        self.music.play(-1)
+
+        self.runnerSound = pygame.mixer.Sound("sounds/runner.ogg")
+        self.runStartSound = pygame.mixer.Sound("sounds/run-start.ogg")
+        self.runnerSound1 = pygame.mixer.Sound("sounds/runner-1.ogg")
+
+        self.runStartSound.play()
+        self.runnerSound.play(-1)
+        self.runnerSound1.play(-1)
 
     def mainLoop(self) :
 

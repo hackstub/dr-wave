@@ -45,19 +45,9 @@ class Character() :
         # Loading sounds
         self.dashLoadingSound = pygame.mixer.Sound("sounds/dash-charge.ogg")
         self.dashSound = pygame.mixer.Sound("sounds/dash.ogg")
-        self.dashSound = pygame.mixer.Sound("sounds/runner.ogg")
+        self.crashSound = pygame.mixer.Sound("sounds/run-end.ogg")
 
     def update(self) :
-
-        # Loading background sounds
-        #self.runStartSound = pygame.mixer.Sound("sounds/run-start.ogg")
-        #self.runnerSound1 = pygame.mixer.Sound("sounds/runner.ogg")
-        
-        #self.runnerSound2 = pygame.mixer.Sound("sounds/runner-1.ogg")
-
-        #self.runnerSound1.play()
-        #self.runStartSound.play()
-        #self.runnerSound2.play()
 
         self.waveStateCD.tick()
         self.transformDisabledCD.tick()
@@ -129,6 +119,7 @@ class Character() :
     def die(self) :
         
         if (self.status == CharacterState.DEAD) :
+            self.crashSound.play()
             return
 
         self.status = CharacterState.DEAD
