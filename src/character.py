@@ -81,7 +81,7 @@ class Character() :
                 self.doneMorphingBack()
 
         elif (self.status == CharacterState.DEAD) :
-            shared.score = shared.game.clock.t
+            shared.score = shared.game.clock.dt
             idBefore = self.dead.currentId
             self.dead.tick()
             idAfter = self.dead.currentId
@@ -133,7 +133,7 @@ class Character() :
         (self.morph.currentId/len(self.morph.sprites) > 0.5)) : return False
         if ((self.status == CharacterState.MORPH_BACK) and
         (self.morph.currentId/len(self.morph.sprites) < 0.5)) : return False
-
+        
         return True
 
 
