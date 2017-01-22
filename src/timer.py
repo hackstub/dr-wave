@@ -16,7 +16,7 @@ class Timer() :
         self.dt = self.t-self.t0
 
     def render(self) :
-        t, dx = math.floor((self.dt)/100), 0
+        t, dx = math.floor(self.dt/1000), 0
         shared.game.screen.blit(self.box,     (shared.screenSize[0]-188, 12))
         for c in str(t):
             shared.game.screen.blit(self.digits.sprites[int(c)],

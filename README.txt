@@ -16,7 +16,9 @@ him!
 
 Up/Down/Enter : Menu selection
 
-F : Turn into a wave to escape obstacles
+F : Turn into a wave to avoid obstacles
+
+F+Up : Jump over obstacles
 
 [ ] > How to launch the game
 
@@ -34,3 +36,12 @@ OR
 	python main.py
 
 On Debian and Ubuntu, you may need to substitute "python" with "python3".
+
+[ ] > Credits
+
+Akaash : Graphics
+Alex : Code
+Hicham : Graphics
+Jerem : Sound design, Code
+Nico : Graphics
+Val : Music, Code
