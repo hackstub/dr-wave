@@ -34,3 +34,12 @@ OR
 	python main.py
 
 On Debian and Ubuntu, you may need to substitute "python" with "python3".
+
+[ ] > Credits
+
+Akaash : Graphics
+Alex : Code
+Hicham : Graphics
+Jerem : Sound design, Code
+Nico : Graphics
+Val : Music, Code
