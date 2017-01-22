@@ -53,7 +53,7 @@ def loadAssets() :
     for i in range(6) :
         assetsdb["bg0"].append(pygame.image.load("assets/bg0/"+str(i)+".png"))
         assetsdb["bg0"][i].convert_alpha()
-    for i in range(7) :
+    for i in range(8) :
         assetsdb["bg1"].append(pygame.image.load("assets/bg1/"+str(i)+".png"))
         assetsdb["bg1"][i].convert_alpha()
     for i in range(5) :
