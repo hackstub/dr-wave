@@ -34,6 +34,7 @@ class Menu() :
         
         # Update stuff
         shared.background.update()
+        self.scoreDisplay.update()
 
         # Render stuff
         shared.game.screen.fill((0,0,0))

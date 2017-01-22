@@ -84,6 +84,8 @@ def loadAssets() :
     assetsdb["die"] = Sequence()
     die = pygame.image.load("assets/perso/die.png")
     assetsdb["die"].load(die, (283,350), 4, (None, 0))
+
+    assetsdb["star"] = pygame.image.load("assets/star.png")
        
 ###############################################################################
 #   Cooldown                                                                  #
