@@ -39,6 +39,8 @@ class Character() :
 
     def reset(self) :
        
+        self.morphChargeCount = 0
+
         self.floor = 0
         
         self.speedUp = shared.Cooldown(30)
@@ -48,7 +50,7 @@ class Character() :
 
         self.status = CharacterState.SOLID
     
-        self.waveStateCD = shared.Cooldown(10, start=False)
+        self.waveStateCD = shared.Cooldown(5, start=False)
         self.morphDisabledCD = shared.Cooldown(10, start=False)
  
     def update(self) :
@@ -56,7 +58,11 @@ class Character() :
         self.waveStateCD.tick()
         self.morphDisabledCD.tick()
         self.speedUp.tick()
-        
+       
+        if  ((self.morphChargeCount > 0)
+        and  (self.morphChargeCount < 70)) :   # LOL WHY 70  ?
+            self.morphChargeCount += 1
+
         if (self.status == CharacterState.SOLID) :
             self.run.tick()
 
@@ -163,27 +169,23 @@ class Character() :
 
     def doneMorphingTo(self) :
 
+        self.waveStateCD = shared.Cooldown(5 + int(self.morphChargeCount/4), start=False)
         self.status = CharacterState.WAVE
-        self.dashLoadingSound.play()
         self.waveStateCD.restart()
 
     def doneMorphingBack(self) :
 
         self.status = CharacterState.SOLID
-        self.dashSound.play()
         self.morphDisabledCD.restart()
          
-    def handleMorphKey(self) :
-
-        if ((self.status == CharacterState.WAVE)
-        or (self.status == CharacterState.MORPH_TO)
-        or (self.morphDisabledCD.active())) :
-            return
+    def morphStart(self) :
 
         shared.game.screen.fill((0,0,0))
         self.status = CharacterState.MORPH_TO
         self.morph.setCurrentSprite(0)
         self.morph.reverseLoop = False
+        self.dashLoadingSound.stop()
+        self.dashSound.play()
 
         if (pygame.key.get_pressed()[pygame.K_UP]) :
             self.floor += 1
@@ -193,5 +195,15 @@ class Character() :
         if (self.floor <  0) : self.floor = 0
         if (self.floor >= 1) : self.floor = 1
 
+    def morphCharge(self) :
+
+        if ((self.status == CharacterState.WAVE)
+        or (self.status == CharacterState.MORPH_TO)
+        or (self.morphDisabledCD.active())) :
+            return
+        
+        self.dashLoadingSound.play()
+
+        self.morphChargeCount = 1
 
 

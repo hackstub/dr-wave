@@ -12,8 +12,6 @@ class Background() :
         self.line    = shared.assetsdb["bottomline"]
         self.seauley = shared.assetsdb["seauley"]
        
-        self.weirdEffectParam = 0
-
     def update(self) :
 
         pass
@@ -32,15 +30,13 @@ class Background() :
             self.render1At(charpos+1)
             self.render0At(charpos+1)
 
-            self.weirdEffectParam = 0
         else :
            
-            wea = self.weirdEffectParam
+            wea = 20 * shared.character.waveStateCD.c / shared.character.waveStateCD.duration
             if (wea > 10) : 
                 wea = 20 - wea
             wea = int(1.5*wea)
 
-       
             r = wea*13
             g = 150-wea*wea/2
             b = 150-wea*7
@@ -48,6 +44,9 @@ class Background() :
             if (r < 0) : r = 0
             if (g < 0) : g = 0
             if (b < 0) : b = 0
+            if (r > 254) : r = 254
+            if (g > 254) : g = 254
+            if (b > 254) : b = 254
 
             shared.game.screen.fill((r,g,b))
             shared.game.screen.blit(self.bg3,     (0,0))
@@ -63,8 +62,6 @@ class Background() :
                 i = wea - i
                 self.render0At(charpos - i*i*4)
 
-            self.weirdEffectParam += 1
-        
         shared.game.screen.blit(self.line, (0,0))
 
     def render0At(self, pos) :
