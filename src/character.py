@@ -164,7 +164,7 @@ class Character() :
         width, height = sprite.get_size()
 
         shared.game.screen.blit(sprite, (shared.screenSize[0] / 4 - width/2,
-                                         shared.screenSize[1] - 30 - self.floor * 200 - height))
+                                         shared.screenSize[1] - 30 - self.floor * 320 - height))
 
 
     def doneMorphingTo(self) :
@@ -179,6 +179,11 @@ class Character() :
         self.morphDisabledCD.restart()
          
     def morphStart(self) :
+
+        if ((self.status == CharacterState.WAVE)
+        or (self.status == CharacterState.MORPH_TO)
+        or (self.morphDisabledCD.active())) :
+            return
 
         shared.game.screen.fill((0,0,0))
         self.status = CharacterState.MORPH_TO

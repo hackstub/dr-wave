@@ -73,6 +73,11 @@ def loadAssets() :
         assetsdb["obstacles"].append(pygame.image.load("assets/obstacles/"+str(i)+".png"))
         assetsdb["obstacles"][i].convert_alpha()
 
+    assetsdb["plateformes"] = []
+    for i in range(3) :
+        assetsdb["plateformes"].append(pygame.image.load("assets/plateformes/large"+str(i)+".png"))
+        assetsdb["plateformes"][i].convert_alpha()
+
     assetsdb["run"] = Sequence(reverseLoop=True)
     run = pygame.image.load("assets/perso/run.png")
     assetsdb["run"].load(run, (283,283), 5, (None, 0))
