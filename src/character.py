@@ -88,6 +88,9 @@ class Character() :
 
         elif (self.status == CharacterState.DEAD) :
             shared.score = shared.game.clock.dt
+            hsfile = open("highscore.txt", "r+")
+            hsfile.write(str(shared.highscore))
+            hsfile.close()
             idBefore = self.dead.currentId
             self.dead.tick()
             idAfter = self.dead.currentId

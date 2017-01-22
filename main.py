@@ -22,6 +22,7 @@ def main() :
     shared.score = 0
     hsfile = open("highscore.txt", "r+")
     hs = hsfile.read()
+    hsfile.close()
     shared.highscore = int(hs.strip())
 
     shared.game = menu.Menu()
