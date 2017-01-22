@@ -4,7 +4,7 @@ class Background() :
 
     def __init__(self) :
 
-        self.pieces = shared.assetsdb["bg"]
+        self.pieces = shared.assetsdb["bg2"]
         
         self.line    = shared.assetsdb["bottomline"]
         self.seauley = shared.assetsdb["seauley"]

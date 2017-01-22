@@ -5,11 +5,11 @@ class Obstacles() :
 
     def __init__(self) :
 
-        #self.obstaclePos = [ 1000 ]
-        self.obstaclePos = [ ]
+        self.obstaclePos = [ 1000 ]
+        #self.obstaclePos = [ ]
 
-        self.sprite = shared.assetsdb["block"]
-        self.width, self.height = self.sprite.get_size()
+        self.sprites = shared.assetsdb["obstacles"]
+        self.width, self.height = self.sprites[0].get_size()
 
     def update(self) :
 
@@ -28,8 +28,8 @@ class Obstacles() :
             if (abs(shared.character.pos - x) > shared.screenSize[0]) :
                 continue
 
-            shared.game.screen.blit(self.sprite, (shared.screenSize[0]/2 + x -
-                shared.character.pos - self.width/2,610))
+            shared.game.screen.blit(self.sprites[0], (shared.screenSize[0]/2 + x -
+                shared.character.pos - self.width/2,410))
 
 
 

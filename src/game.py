@@ -66,7 +66,7 @@ class Game() :
 
                 # If F is pressed, do some stuff
                 if (event.key == pygame.K_f) :
-                    shared.character.handleTransformKey()
+                    shared.character.handleMorphKey()
 
     def getNextScene(self) :
 
