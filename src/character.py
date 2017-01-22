@@ -30,23 +30,27 @@ class Character() :
         self.dead = shared.assetsdb["die"]
         self.dead.setCooldown(4)
 
-        self.pos = 0
-
-        self.status = CharacterState.SOLID
-    
-        self.waveStateCD = shared.Cooldown(10, start=False)
-        self.morphDisabledCD = shared.Cooldown(10, start=False)
-        
-        self.speedUp = shared.Cooldown(30)
-        self.speedUpFactor = 1.0
-
-        self.floor = 0
+        self.reset()
 
         # Loading sounds
         self.dashLoadingSound = pygame.mixer.Sound("assets/sounds/dash-charge.ogg")
         self.dashSound = pygame.mixer.Sound("assets/sounds/dash.ogg")
         self.crashSound = pygame.mixer.Sound("assets/sounds/run-end.ogg")
 
+    def reset(self) :
+       
+        self.floor = 0
+        
+        self.speedUp = shared.Cooldown(30)
+        self.speedUpFactor = 1.0
+
+        self.pos = 0
+
+        self.status = CharacterState.SOLID
+    
+        self.waveStateCD = shared.Cooldown(10, start=False)
+        self.morphDisabledCD = shared.Cooldown(10, start=False)
+ 
     def update(self) :
 
         self.waveStateCD.tick()
@@ -75,8 +79,10 @@ class Character() :
             self.dead.tick()
             idAfter = self.dead.currentId
             if (idAfter < idBefore) :
-                print("Game over lol")
-                sys.exit(-1)
+                #~ print("Game over lol")
+                shared.score = shared.game.clock.t
+                shared.over = True
+                #~ sys.exit(-1)
 
         if (self.waveStateCD.justStopped()) :
             self.status = CharacterState.SOLID

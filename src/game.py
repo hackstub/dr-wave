@@ -14,7 +14,7 @@ class Game() :
         pygame.display.set_caption("Doctor Wave")
 
         # Set up FPS clock
-        self.fps = 30
+        self.fps = 60
         self.fpsClock = pygame.time.Clock()
         
         self.clock = timer.Timer()
@@ -29,6 +29,9 @@ class Game() :
         self.runStartSound.play()
         self.runnerSound.play(-1)
         self.runnerSound1.play(-1)
+        
+        shared.score = 0
+        shared.over = False
 
     def mainLoop(self) :
 
@@ -69,8 +72,14 @@ class Game() :
                     shared.character.handleMorphKey()
 
     def getNextScene(self) :
-
-        return None
+        if shared.over:
+            self.music.stop()
+            self.runnerSound.stop()
+            self.runStartSound.stop()
+            self.music.stop()
+            shared.character.reset()
+            return "menu"
+        else: return None
 
 
 

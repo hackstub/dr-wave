@@ -15,7 +15,7 @@ class Menu() :
         pygame.display.set_caption("Doctor Wave")
 
         # Set up FPS clock
-        self.fps = 30
+        self.fps = 60
         self.fpsClock = pygame.time.Clock()
         
         self.select, self.dy, self.menuanim = 1, 0, False
@@ -39,12 +39,7 @@ class Menu() :
         
         if self.menuanim:
             self.dy += 8
-        
-        if pygame.key.get_pressed()[pygame.K_RETURN] and self.select == 1:
-            self.click.play()
-            pygame.mixer.music.fadeout(1000)
-            self.menuanim = True
-        
+
         # Update screen
         pygame.display.update()
         self.fpsClock.tick(self.fps)
@@ -71,6 +66,12 @@ class Menu() :
                 if (event.key == pygame.K_RETURN) and self.select == 2:
                     pygame.quit()
                     sys.exit(0)
+
+        if pygame.key.get_pressed()[pygame.K_RETURN] and self.select == 1:
+            self.click.play()
+            pygame.mixer.music.fadeout(1000)
+            self.menuanim = True
+        
 
     def getNextScene(self):
         if self.dy > 230:
