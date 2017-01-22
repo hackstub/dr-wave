@@ -20,6 +20,10 @@ pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP])
 
 def main() :
     shared.score = 0
+    hsfile = open("highscore.txt", "r+")
+    hs = hsfile.read()
+    shared.highscore = int(hs.strip())
+
     shared.game = menu.Menu()
 
     shared.loadAssets()
