@@ -21,6 +21,9 @@ F : Dash
 
 On Linux, install Python 3 and Pygame and run the game with:
 
+    cd download/dr_wave/
+    ./play
+OR
 	python main.py
 
 On Debian and Ubuntu, you may need to substiture "python" with "python3".
