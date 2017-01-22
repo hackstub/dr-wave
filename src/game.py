@@ -32,6 +32,7 @@ class Game() :
         
         shared.score = 0
         shared.over = False
+
     def mainLoop(self) :
 
         # Handle events
@@ -76,6 +77,7 @@ class Game() :
             self.runnerSound.stop()
             self.runStartSound.stop()
             self.music.stop()
+            shared.character.reset()
             return "menu"
         else: return None
 
