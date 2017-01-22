@@ -186,7 +186,8 @@ class Character() :
 
         self.status = CharacterState.SOLID
         self.morphDisabledCD.restart()
-        
+        self.morphChargeCount = 0
+
     def morphStart(self) :
 
 
