@@ -174,7 +174,7 @@ class Character() :
         self.dashSound.play()
         self.morphDisabledCD.restart()
          
-    def handleMorphKey(self) :
+    def morphCharge(self) :
 
         if ((self.status == CharacterState.WAVE)
         or (self.status == CharacterState.MORPH_TO)
@@ -194,5 +194,8 @@ class Character() :
         if (self.floor <  0) : self.floor = 0
         if (self.floor >= 1) : self.floor = 1
 
+    def morphStart(self) :
+
+        print("Plop")
 
 

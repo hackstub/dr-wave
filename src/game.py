@@ -69,7 +69,16 @@ class Game() :
 
                 # If F is pressed, do some stuff
                 if (event.key == pygame.K_f) :
-                    shared.character.handleMorphKey()
+                    shared.character.morphCharge()
+
+            if (event.type == pygame.KEYUP) :
+
+                # If F is pressed, do some stuff
+                if (event.key == pygame.K_f) :
+                    shared.character.morphStart()
+
+
+
 
     def getNextScene(self) :
         if shared.over:
