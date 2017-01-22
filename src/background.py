@@ -38,8 +38,18 @@ class Background() :
             wea = self.weirdEffectParam
             if (wea > 10) : 
                 wea = 20 - wea
-        
-            shared.game.screen.fill((wea*13,150-wea*wea,150-wea*13))
+            wea = int(1.5*wea)
+
+       
+            r = wea*13
+            g = 150-wea*wea/2
+            b = 150-wea*7
+           
+            if (r < 0) : r = 0
+            if (g < 0) : g = 0
+            if (b < 0) : b = 0
+
+            shared.game.screen.fill((r,g,b))
             shared.game.screen.blit(self.bg3,     (0,0))
             shared.game.screen.blit(self.seauley, (1000,40))
             

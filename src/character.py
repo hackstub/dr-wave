@@ -43,9 +43,9 @@ class Character() :
         self.floor = 0
 
         # Loading sounds
-        self.dashLoadingSound = pygame.mixer.Sound("sounds/dash-charge.ogg")
-        self.dashSound = pygame.mixer.Sound("sounds/dash.ogg")
-        self.crashSound = pygame.mixer.Sound("sounds/run-end.ogg")
+        self.dashLoadingSound = pygame.mixer.Sound("assets/sounds/dash-charge.ogg")
+        self.dashSound = pygame.mixer.Sound("assets/sounds/dash.ogg")
+        self.crashSound = pygame.mixer.Sound("assets/sounds/run-end.ogg")
 
     def update(self) :
 
