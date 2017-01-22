@@ -19,12 +19,12 @@ class Game() :
         
         self.clock = timer.Timer()
 
-        self.music = pygame.mixer.Sound("music/main.ogg")
+        self.music = pygame.mixer.Sound("assets/music/main.ogg")
         self.music.play(-1)
 
-        self.runnerSound = pygame.mixer.Sound("sounds/runner.ogg")
-        self.runStartSound = pygame.mixer.Sound("sounds/run-start.ogg")
-        self.runnerSound1 = pygame.mixer.Sound("sounds/runner-1.ogg")
+        self.runnerSound = pygame.mixer.Sound("assets/sounds/runner.ogg")
+        self.runStartSound = pygame.mixer.Sound("assets/sounds/run-start.ogg")
+        self.runnerSound1 = pygame.mixer.Sound("assets/sounds/runner-1.ogg")
 
         self.runStartSound.play()
         self.runnerSound.play(-1)
@@ -66,7 +66,7 @@ class Game() :
 
                 # If F is pressed, do some stuff
                 if (event.key == pygame.K_f) :
-                    shared.character.handleTransformKey()
+                    shared.character.handleMorphKey()
 
     def getNextScene(self) :
 

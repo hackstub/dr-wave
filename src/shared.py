@@ -19,54 +19,68 @@ assetsdb = { }
 runLeft  = None
 runRight = None
 
+def mergeBg(bgs) :
+
+    w = 0
+    for bg in bgs :
+        w += bg.get_size()[0]
+    h = bgs[0].get_size()[1]
+
+    out = pygame.Surface((w, h), SRCALPHA)
+    x = 0
+    for bg in bgs :
+        out.blit(bg, (x, 0))
+        x   += bg.get_size()[0]
+
+    return out
+
 def loadAssets() :
-    assetsdb["title"]     = pygame.image.load("assets/menu/title.png")
-    assetsdb["menu_play"] = pygame.image.load("assets/menu/play.png")
-    assetsdb["menu_quit"] = pygame.image.load("assets/menu/quit.png")
-    
-    assetsdb["0"] = pygame.image.load("assets/timer/0.png")
-    assetsdb["1"] = pygame.image.load("assets/timer/1.png")
-    assetsdb["2"] = pygame.image.load("assets/timer/2.png")
-    assetsdb["3"] = pygame.image.load("assets/timer/3.png")
-    assetsdb["4"] = pygame.image.load("assets/timer/4.png")
-    assetsdb["5"] = pygame.image.load("assets/timer/5.png")
-    assetsdb["6"] = pygame.image.load("assets/timer/6.png")
-    assetsdb["7"] = pygame.image.load("assets/timer/7.png")
-    assetsdb["8"] = pygame.image.load("assets/timer/8.png")
-    assetsdb["9"] = pygame.image.load("assets/timer/9.png")
-    
-    assetsdb["bg"] = []
-    for i in range(8) :
-        assetsdb["bg"].append(pygame.image.load("assets/background/"+str(i)+".png"))
-        assetsdb["bg"][i].convert_alpha()
-    
+    assetsdb["title"]     = pygame.image.load("assets/interface/title.png")
+    assetsdb["menu_play"] = pygame.image.load("assets/interface/play.png")
+    assetsdb["menu_quit"] = pygame.image.load("assets/interface/quit.png")
+
+    assetsdb["timer_digits"] = Sequence()
+    timer_digits = pygame.image.load("assets/interface/digits.png")
+    assetsdb["timer_digits"].load(timer_digits, (22,30), 10, (None, 0))
+
+    assetsdb["bg0"] = []
+    assetsdb["bg1"] = []
+    assetsdb["bg2"] = []
+    for i in range(6) :
+        assetsdb["bg0"].append(pygame.image.load("assets/bg0/"+str(i)+".png"))
+        assetsdb["bg0"][i].convert_alpha()
+    for i in range(7) :
+        assetsdb["bg1"].append(pygame.image.load("assets/bg1/"+str(i)+".png"))
+        assetsdb["bg1"][i].convert_alpha()
+    for i in range(5) :
+        assetsdb["bg2"].append(pygame.image.load("assets/bg2/"+str(i)+".png"))
+        assetsdb["bg2"][i].convert_alpha()
+  
+    assetsdb["bg0"] = mergeBg(assetsdb["bg0"]) 
+    assetsdb["bg1"] = mergeBg(assetsdb["bg1"]) 
+    assetsdb["bg2"] = mergeBg(assetsdb["bg2"]) 
+    assetsdb["bg3"] = pygame.image.load("assets/bg3.png")
+
+    assetsdb["seauley"] = pygame.image.load("assets/seauley.png")
     assetsdb["bottomline"] = pygame.image.load("assets/ligne.png")
     
-    assetsdb["block"] = pygame.image.load("assets/block.png")
-    assetsdb["block"].convert_alpha()
+    assetsdb["obstacles"] = []
+    for i in range(10) :
+        assetsdb["obstacles"].append(pygame.image.load("assets/obstacles/"+str(i)+".png"))
+        assetsdb["obstacles"][i].convert_alpha()
 
-    assetsdb["characterrun"] = Sequence(reverseLoop=True)
-    characterrun = pygame.image.load("assets/perso/run.png")
-    assetsdb["characterrun"].load(characterrun, (283,283), 5, (None, 0))
+    assetsdb["run"] = Sequence(reverseLoop=True)
+    run = pygame.image.load("assets/perso/run.png")
+    assetsdb["run"].load(run, (283,283), 5, (None, 0))
 
-    assetsdb["charactertransfo"] = Sequence()
-    charactertransfo = pygame.image.load("assets/perso/transfo.png")
-    assetsdb["charactertransfo"].load(charactertransfo, (283,283), 7, (None, 0))
+    assetsdb["morph"] = Sequence()
+    morph = pygame.image.load("assets/perso/morph.png")
+    assetsdb["morph"].load(morph, (283,283), 7, (None, 0))
  
-    assetsdb["charactermort"] = Sequence()
-    charactermort = pygame.image.load("assets/perso/mort.png")
-    assetsdb["charactermort"].load(charactermort, (283,350), 4, (None, 0))
+    assetsdb["die"] = Sequence()
+    die = pygame.image.load("assets/perso/die.png")
+    assetsdb["die"].load(die, (283,350), 4, (None, 0))
        
-    #global runLeft
-    #global runRight
-    #runLeft = Sequence()
-    #runRight = Sequence()
-   
-    #runImage = pygame.image.load("assets/spriterun.png")
-    #runLeft .load(runImage, (225,225), 4, (None, 1))
-    #runRight.load(runImage, (225,225), 4, (None, 0))
-
-
 ###############################################################################
 #   Cooldown                                                                  #
 ###############################################################################

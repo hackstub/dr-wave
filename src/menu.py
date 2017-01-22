@@ -20,8 +20,8 @@ class Menu() :
         
         self.select, self.dy, self.menuanim = 1, 0, False
 
-        self.click = pygame.mixer.Sound("sounds/click.ogg")
-        pygame.mixer.music.load("music/menu.ogg")
+        self.click = pygame.mixer.Sound("assets/sounds/click.ogg")
+        pygame.mixer.music.load("assets/music/menu.ogg")
         pygame.mixer.music.play(-1)
    
     def mainLoop(self) :
@@ -34,7 +34,7 @@ class Menu() :
 
         # Render stuff
         shared.game.screen.fill((0,0,0))
-        shared.background.renderAt(1)
+        shared.background.render()
         shared.menuGraphics.render(self.select, self.dy)
         
         if self.menuanim:
@@ -70,6 +70,7 @@ class Menu() :
                 
                 if (event.key == pygame.K_RETURN) and self.select == 2:
                     pygame.quit()
+                    sys.exit(0)
 
     def getNextScene(self):
         if self.dy > 230:
