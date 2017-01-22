@@ -1,4 +1,5 @@
 # Misc system stuff
+import os
 import sys
 
 # Pygame
@@ -17,6 +18,10 @@ import src.obstacles as obstacles
 pygame.init()
 pygame.mixer.init(48000)
 pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP])
+
+# Fix for when game is launched with wrong cwd
+if (sys.argv[0].startswith('/')) :
+    os.chdir(os.path.dirname(sys.argv[0]))
 
 def main() :
     shared.score = 0

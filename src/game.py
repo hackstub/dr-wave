@@ -14,7 +14,7 @@ class Game() :
         pygame.display.set_caption("Doctor Wave")
 
         # Set up FPS clock
-        self.fps = 60
+        self.fps = 30
         self.fpsClock = pygame.time.Clock()
         
         self.clock = timer.Timer()
