@@ -15,7 +15,7 @@ class Menu() :
         pygame.display.set_caption("Doctor Wave")
 
         # Set up FPS clock
-        self.fps = 30
+        self.fps = 60
         self.fpsClock = pygame.time.Clock()
         
         self.select, self.dy, self.menuanim = 1, 0, False
