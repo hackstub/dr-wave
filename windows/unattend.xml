@@ -1,0 +1,4 @@
+<Options>
+<Option Name="PrependPath" Value="1" />
+<Option Name="SimpleInstall" Value="yes" />
+</Options>
