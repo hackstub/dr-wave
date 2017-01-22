@@ -59,15 +59,15 @@ class Background() :
 
     def render0At(self, pos) :
 
-        self.renderLayerAt(pos,   self.bg0)
+        self.renderLayerAt(pos/2,   self.bg0)
 
     def render1At(self, pos) :
 
-        self.renderLayerAt(pos/2, self.bg1)
+        self.renderLayerAt(pos/4, self.bg1)
 
     def render2At(self, pos) :
 
-        self.renderLayerAt(pos/4, self.bg2)
+        self.renderLayerAt(pos/8, self.bg2)
 
     def renderLayerAt(self, pos, bg) :
 

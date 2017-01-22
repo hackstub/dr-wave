@@ -96,13 +96,13 @@ class Character() :
     def speed(self) :
 
         if (self.status == CharacterState.SOLID) :
-            return 10*self.speedUpFactor
+            return 20*self.speedUpFactor
         if (self.status == CharacterState.MORPH_TO) :
-            return (10 + 40 * self.morph.currentId/len(self.morph.sprites))*self.speedUpFactor
+            return (20 + 40 * self.morph.currentId/len(self.morph.sprites))*self.speedUpFactor
         if (self.status == CharacterState.MORPH_BACK) :
-            return (10 + 40 * self.morph.currentId/len(self.morph.sprites))*self.speedUpFactor
+            return (20 + 40 * self.morph.currentId/len(self.morph.sprites))*self.speedUpFactor
         if (self.status == CharacterState.WAVE) :
-            return 50*self.speedUpFactor
+            return 60*self.speedUpFactor
         else :
             return 0
 

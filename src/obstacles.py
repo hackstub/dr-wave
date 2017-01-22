@@ -5,7 +5,7 @@ class Obstacles() :
 
     def __init__(self) :
 
-        self.obstaclePos = [ 1000 ]
+        self.obstaclePos = [ 2000, 6000, 12000 ]
         #self.obstaclePos = [ ]
 
         self.sprites = shared.assetsdb["obstacles"]
