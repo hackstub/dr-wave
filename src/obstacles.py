@@ -8,9 +8,9 @@ class Obstacles() :
         self.obstaclePos = [ 2000, 6000, 12000 ]
         #self.obstaclePos = [ ]
 
-        self.plateformePos  = [ 2000, 6000, 12000 ]
-        self.plateformeType = [ 0,    1,    2     ]
-
+        self.plateformePos = [];         self.plateformeType = [];
+        for x in [ 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750] :
+            self.plateformePos.append(x); self.plateformeType.append(0);
 
 
         self.sprites = shared.assetsdb["obstacles"]
@@ -31,12 +31,19 @@ class Obstacles() :
     
     def plateformeAtX(self, x) :
 
-        pass
+        for i, xp in enumerate(self.plateformePos) :
+
+            t = self.plateformeType[i]
+            w, h = shared.assetsdb["plateformes"][t].get_size()
+
+            if (x > xp - w/2) and (x < xp + w /2) : 
+                return True
+
+        return False
 
     def obstacleAtX(self, x) :
-    
-        pass
         
+        pass
 
     def render(self) :
 
@@ -53,9 +60,10 @@ class Obstacles() :
             if (abs(shared.character.pos - x) > 2*shared.screenSize[0]) :
                 continue
 
-            w, h = shared.assetsdb["plateformes"][i].get_size()
+            t = self.plateformeType[i]
+            w, h = shared.assetsdb["plateformes"][t].get_size()
 
-            shared.game.screen.blit(shared.assetsdb["plateformes"][i], (shared.screenSize[0]/4 + x -
+            shared.game.screen.blit(shared.assetsdb["plateformes"][t], (shared.screenSize[0]/4 + x -
                 shared.character.pos - w/2,350))
 
 

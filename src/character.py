@@ -66,6 +66,12 @@ class Character() :
         if (self.status == CharacterState.SOLID) :
             self.run.tick()
 
+            if (self.floor != 0) and (not shared.obstacles.plateformeAtX(self.pos)) :
+                self.floor -= 0.05
+
+            if (self.floor <= 0) :
+                self.floor = 0
+
         elif (self.status == CharacterState.MORPH_TO) :
             idBefore = self.morph.currentId
             self.morph.tick()
