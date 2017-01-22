@@ -75,8 +75,10 @@ class Character() :
             self.dead.tick()
             idAfter = self.dead.currentId
             if (idAfter < idBefore) :
-                print("Game over lol")
-                sys.exit(-1)
+                #~ print("Game over lol")
+                shared.score = shared.game.clock.t
+                shared.over = True
+                #~ sys.exit(-1)
 
         if (self.waveStateCD.justStopped()) :
             self.status = CharacterState.SOLID
