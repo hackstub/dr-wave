@@ -5,7 +5,10 @@ class Obstacles() :
 
     def __init__(self) :
 
-        self.obstaclePos = [ 2000, 6000, 12000 ]
+        # Obstacle 
+
+        self.obstaclePos  = [ 2000, 6000, 12000 ]
+        self.obstacleType = [ 0, 0, 0]
         #self.obstaclePos = [ ]
 
         self.plateformePos = [];         self.plateformeType = [];
@@ -29,6 +32,13 @@ class Obstacles() :
                 self.width/2) * 0.65) :
                 shared.character.die()
     
+    #def passerelleFromTo(self, begin, end) :
+    #
+    #     x = 0
+    #     while (x < end - begin) :
+    #        self.plateformePos.append(x); self.plateformeType.append(0);
+
+
     def plateformeAtX(self, x) :
 
         for i, xp in enumerate(self.plateformePos) :
