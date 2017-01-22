@@ -20,13 +20,13 @@ class MenuGraphics() :
     def render(self, idx, dy) :
         shared.game.screen.blit(shared.assetsdb["bottomline"], (0,0))
 
-        t = 1000*pygame.time.get_ticks()
+        t = pygame.time.get_ticks() / 30
         if idx == 1:
-            d1 = 10*math.sin(t)
+            d1 = 7*math.sin(t)
             d2 = 0
         else:
             d1 = 0
-            d2 = 10*math.sin(t)
+            d2 = 7*math.sin(t)
         
         shared.game.screen.blit(self.title, (shared.screenSize[0]/2-self.title.get_size()[0]/2,20-dy))
         if shared.score > 0 :
