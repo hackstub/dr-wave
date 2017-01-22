@@ -16,7 +16,9 @@ him!
 
 Up/Down/Enter : Menu selection
 
-F : Turn into a wave to escape obstacles
+F : Turn into a wave to avoid obstacles
+
+F+Up : Jump over obstacles
 
 [ ] > How to launch the game
 
