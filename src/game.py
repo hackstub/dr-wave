@@ -29,7 +29,9 @@ class Game() :
         self.runStartSound.play()
         self.runnerSound.play(-1)
         self.runnerSound1.play(-1)
-
+        
+        shared.score = 0
+        shared.over = False
     def mainLoop(self) :
 
         # Handle events
@@ -69,8 +71,13 @@ class Game() :
                     shared.character.handleMorphKey()
 
     def getNextScene(self) :
-
-        return None
+        if shared.over:
+            self.music.stop()
+            self.runnerSound.stop()
+            self.runStartSound.stop()
+            self.music.stop()
+            return "menu"
+        else: return None
 
 
 

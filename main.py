@@ -34,8 +34,8 @@ def main() :
         
         nextScene = shared.game.getNextScene()
         
-        if nextScene == "game": 
-            shared.game = game.Game()
+        if nextScene == "game": shared.game = game.Game()
+        elif nextScene == "menu": shared.game = menu.Menu()
 
 
 main()
