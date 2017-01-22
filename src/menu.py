@@ -34,7 +34,7 @@ class Menu() :
 
         # Render stuff
         shared.game.screen.fill((0,0,0))
-        shared.background.renderAt(1)
+        shared.background.render()
         shared.menuGraphics.render(self.select, self.dy)
         
         if self.menuanim:

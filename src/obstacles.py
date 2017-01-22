@@ -28,7 +28,7 @@ class Obstacles() :
             if (abs(shared.character.pos - x) > shared.screenSize[0]) :
                 continue
 
-            shared.game.screen.blit(self.sprites[0], (shared.screenSize[0]/2 + x -
+            shared.game.screen.blit(self.sprites[0], (shared.screenSize[0]/4 + x -
                 shared.character.pos - self.width/2,410))
 
 

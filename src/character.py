@@ -111,10 +111,20 @@ class Character() :
         sprite = self.run.getCurrentSprite()
         width, height = sprite.get_size()
         return width
+        
+    def wavemode(self) : 
+        return (self.status == CharacterState.WAVE)
 
     def collides(self) :
 
-        return (self.status != CharacterState.WAVE)
+        if (self.status == CharacterState.WAVE) : return False
+        if ((self.status == CharacterState.MORPH_TO) and
+        (self.morph.currentId/len(self.morph.sprites) > 0.5)) : return False
+        if ((self.status == CharacterState.MORPH_BACK) and
+        (self.morph.currentId/len(self.morph.sprites) < 0.5)) : return False
+
+        return True
+
 
     def die(self) :
         
@@ -142,7 +152,7 @@ class Character() :
         
         width, height = sprite.get_size()
 
-        shared.game.screen.blit(sprite, (shared.screenSize[0] / 2 - width/2,
+        shared.game.screen.blit(sprite, (shared.screenSize[0] / 4 - width/2,
                                          shared.screenSize[1] - 30 - self.floor * 200 - height))
 
 

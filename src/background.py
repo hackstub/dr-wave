@@ -43,13 +43,16 @@ class Background() :
 
         charpos = shared.character.pos
 
-        if (shared.character.collides()) :
+        if (not shared.character.wavemode()) :
         
             shared.game.screen.fill((0,240,240))
             shared.game.screen.blit(self.globalbg, (0,0))
             shared.game.screen.blit(self.seauley, (1000,40))
             
-            self.renderAt(charpos)
+            self.render2At(charpos+1)
+            self.render1At(charpos+1)
+            self.render0At(charpos+1)
+
             self.weirdEffectParam = 0
         else :
            
@@ -63,16 +66,29 @@ class Background() :
             
             for i in range(0, wea) :
                 i = wea - i
-                self.renderAt(charpos - i*i*4)
+                self.render2At(charpos - i*i*4)
+            for i in range(0, wea) :
+                i = wea - i
+                self.render1At(charpos - i*i*4)
+            for i in range(0, wea) :
+                i = wea - i
+                self.render0At(charpos - i*i*4)
+
             self.weirdEffectParam += 1
         
         shared.game.screen.blit(self.line, (0,0))
 
-    def renderAt(self, pos) :
+    def render0At(self, pos) :
+
+        self.renderLayerAt(pos,   self.pieces0, self.pieces0Edges, self.allPiecesWidth0)
+
+    def render1At(self, pos) :
+
+        self.renderLayerAt(pos/2, self.pieces1, self.pieces1Edges, self.allPiecesWidth1)
+
+    def render2At(self, pos) :
 
         self.renderLayerAt(pos/4, self.pieces2, self.pieces2Edges, self.allPiecesWidth2)
-        self.renderLayerAt(pos/2, self.pieces1, self.pieces1Edges, self.allPiecesWidth1)
-        self.renderLayerAt(pos,   self.pieces0, self.pieces0Edges, self.allPiecesWidth0)
 
     def renderLayerAt(self, pos, pieces, edges, allwidth) :
 
