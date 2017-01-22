@@ -77,9 +77,6 @@ class Game() :
                 if (event.key == pygame.K_f) :
                     shared.character.morphStart()
 
-
-
-
     def getNextScene(self) :
         if shared.over:
             self.music.stop()

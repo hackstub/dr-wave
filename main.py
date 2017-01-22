@@ -19,6 +19,7 @@ pygame.mixer.init(48000)
 pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP])
 
 def main() :
+    shared.score = 0
     shared.game = menu.Menu()
 
     shared.loadAssets()

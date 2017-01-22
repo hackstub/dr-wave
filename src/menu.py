@@ -1,6 +1,7 @@
 import sys
 import src.shared as shared
 import src.menuGraphics as menuGraphics
+import src.scoreDisplay as scoreDisplay
 import src.game as game
 
 import pygame
@@ -24,6 +25,8 @@ class Menu() :
         pygame.mixer.music.load("assets/music/menu.ogg")
         pygame.mixer.music.play(-1)
    
+        self.scoreDisplay = scoreDisplay.ScoreDisplay()
+        
     def mainLoop(self) :
         
         # Handle events
@@ -36,6 +39,7 @@ class Menu() :
         shared.game.screen.fill((0,0,0))
         shared.background.render()
         shared.menuGraphics.render(self.select, self.dy)
+        self.scoreDisplay.render()
         
         if self.menuanim:
             self.dy += 8
