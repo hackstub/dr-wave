@@ -19,14 +19,14 @@ class Game() :
         
         self.clock = timer.Timer()
 
-        pygame.mixer.music.load("music/main.ogg")
-        pygame.mixer.music.play(-1)
+        self.music = pygame.mixer.Sound("music/main.ogg")
+        self.music.play()
 
     def mainLoop(self) :
 
         # Handle events
         self.eventHandler()
-        
+
         # Update stuff
         shared.character.update()
         shared.background.update()
@@ -38,11 +38,11 @@ class Game() :
         shared.character.render()
         shared.obstacles.render()
         self.clock.render()
-            
+
         # Update screen
         pygame.display.update()
         self.fpsClock.tick(self.fps)
- 
+
     def eventHandler(self) :
 
         for event in pygame.event.get():
@@ -59,7 +59,7 @@ class Game() :
                 # If F is pressed, do some stuff
                 if (event.key == pygame.K_f) :
                     shared.character.handleTransformKey()
-    
+
     def getNextScene(self) :
 
         return None

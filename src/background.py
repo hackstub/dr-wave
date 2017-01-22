@@ -1,4 +1,3 @@
-
 import src.shared as shared
 
 class Background() :
@@ -18,7 +17,7 @@ class Background() :
             self.piecesEdges.append(x)
 
         self.weirdEffectParam = 0
-
+        
     def update(self) :
 
         pass

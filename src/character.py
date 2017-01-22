@@ -41,8 +41,23 @@ class Character() :
         self.speedUpFactor = 1.0
 
         self.floor = 0
-        
+
+        # Loading sounds
+        self.dashLoadingSound = pygame.mixer.Sound("sounds/dash-charge.ogg")
+        self.dashSound = pygame.mixer.Sound("sounds/dash.ogg")
+        self.dashSound = pygame.mixer.Sound("sounds/runner.ogg")
+
     def update(self) :
+
+        # Loading background sounds
+        #self.runStartSound = pygame.mixer.Sound("sounds/run-start.ogg")
+        #self.runnerSound1 = pygame.mixer.Sound("sounds/runner.ogg")
+        
+        #self.runnerSound2 = pygame.mixer.Sound("sounds/runner-1.ogg")
+
+        #self.runnerSound1.play()
+        #self.runStartSound.play()
+        #self.runnerSound2.play()
 
         self.waveStateCD.tick()
         self.transformDisabledCD.tick()
@@ -143,17 +158,19 @@ class Character() :
     def doneTransformingTo(self) :
 
         self.status = CharacterState.WAVE
+        self.dashLoadingSound.play()
         self.waveStateCD.restart()
 
     def doneTransformingBack(self) :
 
         self.status = CharacterState.SOLID
+        self.dashSound.play()
         self.transformDisabledCD.restart()
          
     def handleTransformKey(self) :
 
-        if ((self.status == self.status.WAVE)
-        or (self.status == self.status.TRANSFORMING_TO)
+        if ((self.status == CharacterState.WAVE)
+        or (self.status == CharacterState.TRANSFORMING_TO)
         or (self.transformDisabledCD.active())) :
             return
 
